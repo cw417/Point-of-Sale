@@ -2,9 +2,11 @@
 
 ## About
 
+This is a basic point-of-sale system built for practice.
+
 ## Decription
 
-I'm trying to create a point-of-sale system similar to Vend to be used at a local store. It will include a main file to initialize and run the program, a gui file to display the pages of the POS system for IO, and a JSON file that will hold dictionary of stock. It will create a JSON file to hold the sales, and a CSV file to hold totals data. The POS system should be able to display daily, monthly, and yearly totals with breakdown between payment types. Totals by time of day could be a later addition, as well as the ability to display data from CSV file in chart format via Pandas dictionary. The GUI will include four pages: a main sales page, a sales ledger page, and a sales totals page, and a page for interfacing with the stock dictionary.
+This will be a point-of-sale system with graphical user interface built in tkinter that can reference a JSON dictionary of items to pull data from for sales. It will store data in a CSV file via pandas that can be used to get certain data metrics such as daily, weekly, monthly totals, gross and net profit, etc...
 
 ## Table of Contents
 - About
@@ -15,15 +17,15 @@ I'm trying to create a point-of-sale system similar to Vend to be used at a loca
 - Acknowledgements
 
 ## Modules Used
--Tkinter (GUI)
--Pandas (Data)
+-Tkinter
+-Pandas
 -JSON
 
 ## Problems/Errors
 
 ## Author(s)
 
-Code written by Christopher Whitlock unless otherwise stated in acknowledgements
+Chris Whitlock
 
 ## Acknowledgements
 
