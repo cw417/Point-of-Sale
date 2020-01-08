@@ -11,6 +11,13 @@ class POS(Frame):
         self.master.title("POS")
         self.pack(fill=BOTH, expand=1)
 
+        close_button = Button(self, text="Close", command=self.client_close)
+
+        close_button.place(x=0, y=0)
+
+    def client_close(self):
+        exit()
+
 root = Tk()
 
 root.geometry("1200x700")
