@@ -17,9 +17,9 @@ This will be a point-of-sale system with graphical user interface built in tkint
 - Acknowledgements
 
 ## Modules Used
--Tkinter
--Pandas
--JSON
+- Tkinter
+- Pandas
+- JSON
 
 ## Problems/Errors
 
