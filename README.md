@@ -1,4 +1,4 @@
-# This is the project outline for the Point-of-Sale system w/ GUI
+# Point-of-Sale system w/ GUI
 
 ## About
 
