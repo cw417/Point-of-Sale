@@ -11,11 +11,26 @@ class POS(Frame):
         self.master.title("POS")
         self.pack(fill=BOTH, expand=1)
 
-        close_button = Button(self, text="Close", command=self.client_close)
+        menu = Menu(self.master)
+        self.master.config(menu=menu)
 
-        close_button.place(x=0, y=0)
+        file = Menu(menu)
 
-    def client_close(self):
+        file.add_command(label="Exit", command=self.client_exit)
+
+        menu.add_cascade(label="File", menu=file)
+
+        edit = Menu(menu)
+
+        edit.add_command(label="Undo")
+        
+        menu.add_cascade(label="Edit", menu=edit)
+
+        exit_button = Button(self, text="Close", command=self.client_exit)
+
+        exit_button.place(x=0, y=0)
+
+    def client_exit(self):
         exit()
 
 root = Tk()
