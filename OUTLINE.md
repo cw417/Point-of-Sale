@@ -50,8 +50,6 @@
             - Item
             - Wholesale Price
             - Sales Price
-            - Price w/ Tax
-            - Stock Total???
         - BUTTON: Add new item
         - BUTTON: Remove item
 
