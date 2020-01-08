@@ -1,4 +1,4 @@
-# Checklist for POS System w/ GUI
+# Outline & Checklist for POS System w/ GUI
 
 ## Main Project Outline
 - GUI
@@ -61,7 +61,7 @@
     - Add items
     - Return total w/ & w/o tax
     - Log sales
-    - Daily, monhtly, yearly totals
+    - Daily, monthly, yearly totals
     - Use pandas for CSV to log data
 - GUI
     - Similar to Vend
