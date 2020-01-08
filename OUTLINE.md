@@ -1,7 +1,7 @@
 # Checklist for POS System w/ GUI
 
 ## Main Project Outline
--GUI
+- GUI
     1) Main Sales Page
         - LABELS:
             - Please type item to search for
