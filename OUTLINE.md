@@ -26,9 +26,15 @@
                 - Enter %
                 - Display discount $ total
                 - Display discount % total
+        - BUTTON: Debit
+        - BUTTON: Credit
+        - BUTTON: Cash
+            - Generate customer change amount
+
     2) Sales Ledger
         - Will display a list of the daily sales
         - BUTTON: Void Sale
+
     3) Totals Page
         - Show daily sales totals when on main Totals page
             - Can change to Monthly or Yearly totals w/ buttons
@@ -47,6 +53,7 @@
         - BUTTON: Filter by Y/M/W/D Total
         - BUTTON: Display spreadsheet
         - BUTTON: Display
+        
     4) Stock Page
         - Display stock items from dictionary
         - LABELS:
