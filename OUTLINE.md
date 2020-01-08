@@ -38,10 +38,13 @@
             - Total Debit
             - Total Credit
             - Total Cash
+            - Gross profit
+            - Expenses
+            - Net profit
         - BUTTON: Change to specific date
             - Interface w/ calendar, or type YYYMMDD value?
-        - BUTTON: Filter by YMD
-        - BUTTON: Filter by Y/M/D Total
+        - BUTTON: Filter by day, week, month, year
+        - BUTTON: Filter by Y/M/W/D Total
         - BUTTON: Display spreadsheet
         - BUTTON: Display
     4) Stock Page
@@ -57,9 +60,9 @@
 - POS
     - Interface with dictionary
     - Add items
-    - Return total w/ & w/o tax
+    - Return totals
     - Log sales
-    - Daily, monthly, yearly totals
+    - Data breakdown
     - Use pandas for CSV to log data
 - GUI
     - Similar to Vend
