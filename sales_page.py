@@ -5,58 +5,56 @@ import products_page as pp
 import totals_page as tp
 import page_settings
 import json
-import datetime as date
+from datetime import datetime
 
+ledger_json = 'ledger.json'
+stock_json = 'stock.json'
+current_sale = {}
+
+def sale_to_ledger(sale):
+    json.dump(sale, open('sales_dict.json', 'a'), indent=4, sort_keys=True)
+
+def sale_to_current(sale):
+    json.dump(sale, open('current_sale.json', 'w'), indent=4, sort_keys=True)
 
 def get_dict(json_fp):
     with open(json_fp) as json_data:
-        pyscrape_dict = json.load(json_data)
+        dict = json.load(json_data)
         json_data.close()
-        return pyscrape_dict
+        return dict
 
 def search_stock(item):
-    stock = 
+    stock = get_dict(stock_json)
     for stock_item in stock:
-        if item == stock_item:
+        if item["name"] == stock_item:
             stock_item.get()
             # Need to write parameters for creating and adding to a current sale
 
-def isdigit_list(nums):
+def check_nums(nums):
     # Checks to see if items in list are digits, and returns list of items that are
     num_list = []
     for num in nums:
-        if num.isdigit() == True:
-            num = int(num)
+        if isinstance(num, int) == True or isinstance(num, float):
+            num = float(num)
             num_list.append(num)
     return num_list
-    
 
-def get_total(total_list):
+def add_total(total_list):
     # Adds up items in a list, and returns the total
     total = 0
     for num in total_list:
         total += num
     return total
-        
-def create_sale():
-    # Used to create sale from items in current sale
-    # Need to add iterative function to add multitple items
-    sale = {}
-    sale_keys = sale.keys()
-    sale_digits = isdigit_list(sale_keys)
-    subtotal = get_total(sale_digits)
+
+def add_to_sale(item, price):
+    current_sale[item] = price
+
+def get_total(sale):
+    vals = sale.values()
+    sale_nums = check_nums(vals)
+    subtotal = add_total(sale_nums)
     total = subtotal * 1.13
-
-    sale["date"] = date.today()
-    sale["item"] = "price"
-    sale["subtotal"] = subtotal
-    sale["total"] = total
-
-    return sale
-
-def sale_to_json(sale)
-    json.dump(sale, open('sales_dict.json', 'a'), indent=4, sort_keys=True)
-    json.dump(sale, open('current_sale.json', 'w'), indent=4, sort_keys=True)
+    return subtotal, total
 
 class Sales(tk.Frame):
 
