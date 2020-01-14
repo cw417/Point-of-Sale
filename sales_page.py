@@ -24,11 +24,16 @@ def get_dict(json_fp):
         return dict
 
 def search_stock(item):
+    # Needs to be configured for 'stock.json'
+    # Need to figure out format for stock dictionary entries
     stock = get_dict(stock_json)
     for stock_item in stock:
         if item["name"] == stock_item:
-            stock_item.get()
+            name = stock_item["name"]
+            price = stock_item["price"]
+            current_sale[name] = price
             # Need to write parameters for creating and adding to a current sale
+
 
 def check_nums(nums):
     # Checks to see if items in list are digits, and returns list of items that are
