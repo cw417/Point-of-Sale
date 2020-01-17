@@ -1,3 +1,4 @@
+from datetime import datetime
 import tkinter as tk
 import pandas as pd
 import defs as defs
@@ -30,10 +31,13 @@ class SalesTracker(tk.Frame):
             dict.update({'total': total})
             pay_type = e_pay_type.get()
             dict.update({'pay_type': pay_type})
+            date = str(datetime.today())
+            dict.update({'date': date})
+
 
             dict_json = json.dump(dict, open("sales.json", 'a'), indent=4, sort_keys=True)
             dict_csv = defs.pd_check(total, pay_type, 'sales.csv')
-            
+
         # Create Labels for entry fields
         l_total = tk.Label(self, width=label_width, text="Sale Total: ")
         l_pay_type = tk.Label(self, width=label_width, text="Payment Type: ")
@@ -43,7 +47,8 @@ class SalesTracker(tk.Frame):
         e_pay_type = tk.Entry(self, width=entry_width)
 
         # Create submit button
-        b_sub = tk.Button(self, width=button_width, text="Submit", command=lambda:[get_entries(), root.quit()])
+        b_sub = tk.Button(self, width=button_width, text="Submit", command=get_entries)
+        b_quit = tk.Button(self, width=button_width, text="Close", command=root.quit)
 
         # Set up layout of label fields
         l_total.grid(row=0, column=0, sticky='w')
@@ -56,10 +61,11 @@ class SalesTracker(tk.Frame):
         # Set button layout
         # Starts at 10 to enable later addition of extra entry fields
         b_sub.grid(row=10, column=0)
+        b_quit.grid(row=11, column=0)
 
 root = tk.Tk()
 
-root.geometry("600x70")
+root.geometry("600x95")
 
 app = SalesTracker(root)
 root.mainloop()
