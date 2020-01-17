@@ -33,20 +33,7 @@ class SalesTracker(tk.Frame):
 
             dict_json = json.dump(dict, open("sales.json", 'a'), indent=4, sort_keys=True)
             dict_csv = defs.pd_check(total, pay_type, 'sales.csv')
-
             
-        def make_pandas(total, pay_type, csv_filepath):
-            data_layout = [[total, pay_type, datetime.today()]]
-            df = pd.DataFrame(data_layout, columns = ['Item', 'Price', 'Date'])
-            make_file = df.to_csv(csv_filepath, mode='a', header=True)
-
-        def append_pandas(total, pay_type, csv_filepath):
-            data_layout = [[total, pay_type, datetime.today()]]
-            df = pd.DataFrame(data_layout)
-            append_csv = df.to_csv(csv_filepath, mode='a', header=False)
-
-            
-
         # Create Labels for entry fields
         l_total = tk.Label(self, width=label_width, text="Sale Total: ")
         l_pay_type = tk.Label(self, width=label_width, text="Payment Type: ")
