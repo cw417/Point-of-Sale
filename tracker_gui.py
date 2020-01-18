@@ -36,7 +36,7 @@ class SalesTracker(tk.Frame):
 
 
             dict_json = json.dump(dict, open("sales.json", 'a'), indent=4, sort_keys=True)
-            dict_csv = defs.pd_check(total, pay_type, 'sales.csv')
+            dict_csv = defs.check_pandas(total, pay_type, 'sales.csv')
 
         # Create Labels for entry fields
         l_total = tk.Label(self, width=label_width, text="Sale Total: ")
