@@ -4,6 +4,7 @@ import json
 import os
 
 csv_fp = 'sales.csv'
+excel_fp = 'sales.xlsx'
 
 
 def get_dict(json_fp):
@@ -22,7 +23,7 @@ def append_pandas(total, pay_type, csv_filepath):
     df = pd.DataFrame(data_layout)
     append_csv = df.to_csv(csv_filepath, mode='a', header=False)
 
-def check_pd(total, pay_type, csv_filepath):
+def check_pandas(total, pay_type, csv_filepath):
     if not os.path.isfile(csv_filepath):
         make_pandas(total, pay_type, csv_filepath)
     else:
@@ -46,3 +47,19 @@ def concat_from_csv(excel_fp, new_df):
     frames = [df, new_df]
     comb = pd.concat(frames, sort=True)
     return comb
+
+def concat_from_file(fp, new_df):
+    """Concatenates existing dataframe
+    in .csv or .xlsx with new_df."""
+    if fp.lower().endswith('csv'):
+        output_df = concat_from_csv(fp, new_df)
+        return output_df
+    elif fp.lower().endswith('xlsx'):
+        output_df = concat_from_excel(fp, new_df)
+        return output_df
+    else:
+        print("File type not available. \nPlease use .csv or .xlsx")
+
+
+
+
