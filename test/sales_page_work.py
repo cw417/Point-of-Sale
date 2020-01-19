@@ -3,12 +3,36 @@ import tkinter as tk
 #import ledger_page as lp 
 #import products_page as pp 
 #import totals_page as tp
-import page_settings
+#import page_settings
 import defs_PLUS as defs
 import json
 from datetime import datetime
 
+
+
+def get_entries_sp():
+            """This function gets entries from the fields and returns them
+            as a dictionary when the submit button is pressed"""
+            dict = {}
+
+            item = e_item.get()
+            dict.update({'item': item})
+            price = e_price.get()
+            dict.update({'price': price })
+
+            current_sale = dict
+
+def append_sale():
+    for k, v in current_sale:
+        sale[k] = v
+
+
+
 root = tk.Tk()
+
+sale = {}
+current_sale = {}
+
 
 # Page-specific buttons, labels, entries
 l_sales = tk.Label(text="Sales")
@@ -28,8 +52,10 @@ e_price = tk.Entry(text="Enter price: ")
 e_price.grid(row=3, column=1)
 
 
-b_get_sale = tk.Button(text="Add to Sale", command=defs.get_entries_sp)
+b_get_sale = tk.Button(text="Add to Sale", command=lambda: [get_entries_sp(), append_sale(), print(sale)])
 b_get_sale.grid(row=10, column=0) 
+
+
 
 
 root.mainloop()
