@@ -69,6 +69,11 @@ def get_total(sale):
 # Checkout button: add current_sale to sales ledger and delete current_sale file
 # Buttons: add_to_sale, checkout
 
+#TO DO: 
+# Make Total button to display totals, clear current_sale, and add sale to ledger.json
+# Find way to display sale as entered
+# 
+
 
 class Sales(tk.Frame):
 
@@ -77,24 +82,60 @@ class Sales(tk.Frame):
             l_sales = tk.Label(self, text="Sales", font=page_settings.LARGE_FONT)
             l_sales.grid(row=0, column=0)
 
-            l_item = tk.Label(self, text="Enter item: ")
-            l_item.grid(row=2, column=0)
-            l_price = tk.Label(self, text="Enter price: ")
-            l_price.grid(row=3, column=0)
+            l_item1 = tk.Label(self, text="Item: ")
+            l_item1.grid(row=2, column=0)
+            l_price1 = tk.Label(self, text="Price: ")
+            l_price1.grid(row=3, column=0)
+            l_item2 = tk.Label(self, text="Item: ")
+            l_item2.grid(row=4, column=0)
+            l_price2 = tk.Label(self, text="Price: ")
+            l_price2.grid(row=5, column=0)
+            l_item3 = tk.Label(self, text="Item: ")
+            l_item3.grid(row=6, column=0)
+            l_price3 = tk.Label(self, text="Price: ")
+            l_price3.grid(row=7, column=0)
+            l_item4 = tk.Label(self, text="Item: ")
+            l_item4.grid(row=8, column=0)
+            l_price4 = tk.Label(self, text="Price: ")
+            l_price4.grid(row=9, column=0)
 
-            e_item = tk.Entry(self, text="Enter item: ")
-            e_item.grid(row=2, column=1)
-            e_price = tk.Entry(self, text="Enter price: ")
-            e_price.grid(row=3, column=1)
 
+            e_item1 = tk.Entry(self, text="item1")
+            e_item1.grid(row=2, column=1)
+            e_price1 = tk.Entry(self, text="price1")
+            e_price1.grid(row=3, column=1)
+            e_item2 = tk.Entry(self, text="item2")
+            e_item2.grid(row=4, column=1)
+            e_price2 = tk.Entry(self, text="price2")
+            e_price2.grid(row=5, column=1)
+            e_item3 = tk.Entry(self, text="item3")
+            e_item3.grid(row=6, column=1)
+            e_price3 = tk.Entry(self, text="price3")
+            e_price3.grid(row=7, column=1)
+            e_item4 = tk.Entry(self, text="item4")
+            e_item4.grid(row=8, column=1)
+            e_price4 = tk.Entry(self, text="price4")
+            e_price4.grid(row=9, column=1)
             
             def get_entries():
                 dict = {}
 
-                item = e_item.get()
-                dict.update({"item": item})
-                price = e_price.get()
-                dict.update({"price": price})
+                item1 = e_item1.get()
+                dict.update({"item1": item1})
+                price1 = e_price1.get()
+                dict.update({"price1": price1})
+                item2 = e_item2.get()
+                dict.update({"item2": item2})
+                price2 = e_price2.get()
+                dict.update({"price2": price2})
+                item3 = e_item3.get()
+                dict.update({"item3": item3})
+                price3 = e_price3.get()
+                dict.update({"price3": price3})
+                item4 = e_item4.get()
+                dict.update({"item4": item4})
+                price4 = e_price4.get()
+                dict.update({"price4": price4})
 
                 if not os.path.isfile(current_sale_fp):
                     json.dump(dict, open(current_sale_fp, 'w'), indent=4, sort_keys=True)
@@ -103,16 +144,16 @@ class Sales(tk.Frame):
 
 
             b_add_to_sale = tk.Button(self, text="Add to Sale", command=get_entries)
-            b_add_to_sale.grid(row=4, column=0)
+            b_add_to_sale.grid(row=10, column=0)
 
             b_home_page = tk.Button(self, text="Home", command=lambda: controller.show_frame(hp.HomePage))
-            b_home_page.grid(row=10, column=0)
+            b_home_page.grid(row=20, column=11)
 
             b_ledger = tk.Button(self, text="Sales Ledger", command=lambda: controller.show_frame(lp.SalesLedger))
-            b_ledger.grid(row=10, column=1)
+            b_ledger.grid(row=20, column=12)
 
             b_products_page = tk.Button(self, text="Products", command=lambda: controller.show_frame(pp.Products))
-            b_products_page.grid(row=10, column=2)
+            b_products_page.grid(row=20, column=13)
 
             b_totals_page = tk.Button(self, text="Totals", command=lambda: controller.show_frame(tp.Totals))
-            b_totals_page.grid(row=10, column=3)
+            b_totals_page.grid(row=20, column=14)
