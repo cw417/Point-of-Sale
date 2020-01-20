@@ -54,11 +54,14 @@ def add_total(total_list):
 def add_to_sale(item, price):
     current_sale[item] = price
 
-def get_total(sale):
+def get_total(current_sale_fp):
+    sale = get_dict(current_sale_fp)
     vals = sale.values()
     sale_nums = check_nums(vals)
+    print(f"Sale nums: {sale_nums}")
     subtotal = add_total(sale_nums)
     total = subtotal * 1.13
+    print(subtotal, total)
     return subtotal, total
 
 
@@ -145,6 +148,9 @@ class Sales(tk.Frame):
 
             b_add_to_sale = tk.Button(self, text="Add to Sale", command=get_entries)
             b_add_to_sale.grid(row=10, column=0)
+
+            b_get_total = tk.Button(self, text="Get Total", command=lambda: get_total(current_sale_fp))
+            b_get_total.grid(row=11, column=0)
 
             b_home_page = tk.Button(self, text="Home", command=lambda: controller.show_frame(hp.HomePage))
             b_home_page.grid(row=20, column=11)

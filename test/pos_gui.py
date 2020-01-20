@@ -38,6 +38,6 @@ class POS(tk.Tk):
 
 app = POS()
 
-app.geometry("1200x700")
+app.geometry("800x400")
 
 app.mainloop()
