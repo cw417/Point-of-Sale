@@ -113,16 +113,20 @@ def add_to_sale(sale, item, price):
 # Flow of defs: two fields-->submit_button-->calls make_sale()--> if sale exists, add_to_sale()
 # Total button: button --> look in sale dict --> get k,v --> grab 'price' keys --> add values to list
 
-def get_entries_sp():
-            """This function gets entries from the fields and returns them
-            as a dictionary when the submit button is pressed"""
-            dict = {}
 
-            item = e_item.get()
-            dict.update({'item': item})
-            price = e_price.get()
-            dict.update({'price': price })
+def check_nums(nums):
+    # Checks to see if items in list are digits, and returns list of items that are
+    num_list = []
+    not_nums = []
+    for num in nums:
+        try:
+            num = float(num)
+            num_list.append(num)
+        except ValueError:
+            continue
+    return num_list
 
+print(check_nums(['2', '3', 'apple', 'pear', '6.99']))
             
 
 

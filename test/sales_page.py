@@ -9,7 +9,7 @@ import json
 import os
 
 
-ledger_json = 'ledger.json'
+ledger_fp = 'ledger.json'
 stock_json = 'stock.json'
 current_sale_fp = 'current_sale.json'
 current_sale = {}
@@ -39,9 +39,11 @@ def check_nums(nums):
     # Checks to see if items in list are digits, and returns list of items that are
     num_list = []
     for num in nums:
-        if isinstance(num, int) == True or isinstance(num, float):
+        try:
             num = float(num)
             num_list.append(num)
+        except ValueError:
+            continue
     return num_list
 
 def add_total(total_list):
@@ -140,10 +142,8 @@ class Sales(tk.Frame):
                 price4 = e_price4.get()
                 dict.update({"price4": price4})
 
-                if not os.path.isfile(current_sale_fp):
-                    json.dump(dict, open(current_sale_fp, 'w'), indent=4, sort_keys=True)
-                else:
-                    json.dump(dict, open(current_sale_fp, 'a'), indent=4, sort_keys=True)
+                json.dump(dict, open(current_sale_fp, 'w'), indent=4, sort_keys=True)
+
 
 
             b_add_to_sale = tk.Button(self, text="Add to Sale", command=get_entries)
