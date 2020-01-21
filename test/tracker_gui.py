@@ -21,42 +21,43 @@ class SalesTracker(tk.Frame):
         entry_width = 60
         button_width = label_width
 
-        def get_entries():
-            """This function gets entries from the fields and returns them
-            as a dictionary when the submit button is pressed"""
-            dict = {}
-
-
-            total = e_total.get()
-            dict.update({'total': total})
-            pay_type = e_pay_type.get()
-            dict.update({'pay_type': pay_type})
-            date = str(datetime.today())
-            dict.update({'date': date})
-
-
-            dict_json = json.dump(dict, open("sales.json", 'a'), indent=4, sort_keys=True)
-            dict_csv = defs.check_csv(total, pay_type, 'sales.csv')
-
+        
         # Create Labels for entry fields
-        l_total = tk.Label(self, width=label_width, text="Sale Total: ")
-        l_pay_type = tk.Label(self, width=label_width, text="Payment Type: ")
+        l_item = tk.Label(self, width=label_width, text="Item: ")
+        l_price = tk.Label(self, width=label_width, text="Price: ")
 
         # Create entry fields
-        e_total = tk.Entry(self, width=entry_width)
-        e_pay_type = tk.Entry(self, width=entry_width)
+        e_item = tk.Entry(self, width=entry_width)
+        e_price = tk.Entry(self, width=entry_width)
+
+        def get_entries():
+            # Dumps entries to json file to be used by current_sale
+
+            items = []
+            prices = []
+            current_sale = {}
+
+            item = e_item.get()
+            items.append(item)
+            price = e_price.get()
+            prices.append(price)
+
+            current_sale.update({"items": items})
+            current_sale.update({"prices": prices})
+
+            return items, prices, current_sale
 
         # Create submit button
-        b_sub = tk.Button(self, width=button_width, text="Submit", command=get_entries)
+        b_sub = tk.Button(self, width=button_width, text="Submit", command=lambda: print(get_entries()))
         b_quit = tk.Button(self, width=button_width, text="Close", command=root.quit)
 
         # Set up layout of label fields
-        l_total.grid(row=0, column=0, sticky='w')
-        l_pay_type.grid(row=1, column=0, sticky='w')
+        l_item.grid(row=0, column=0, sticky='w')
+        l_price.grid(row=1, column=0, sticky='w')
 
         # Set up layout of entry fields
-        e_total.grid(row=0, column=1)
-        e_pay_type.grid(row=1, column=1)
+        e_item.grid(row=0, column=1)
+        e_price.grid(row=1, column=1)
 
         # Set button layout
         # Starts at 10 to enable later addition of extra entry fields
