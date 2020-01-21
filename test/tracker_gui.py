@@ -21,7 +21,6 @@ class SalesTracker(tk.Frame):
         entry_width = 60
         button_width = label_width
 
-        
         # Create Labels for entry fields
         l_item = tk.Label(self, width=label_width, text="Item: ")
         l_price = tk.Label(self, width=label_width, text="Price: ")
@@ -29,23 +28,6 @@ class SalesTracker(tk.Frame):
         # Create entry fields
         e_item = tk.Entry(self, width=entry_width)
         e_price = tk.Entry(self, width=entry_width)
-
-        def get_entries():
-            # Dumps entries to json file to be used by current_sale
-
-            items = []
-            prices = []
-            current_sale = {}
-
-            item = e_item.get()
-            items.append(item)
-            price = e_price.get()
-            prices.append(price)
-
-            current_sale.update({"items": items})
-            current_sale.update({"prices": prices})
-
-            return items, prices, current_sale
 
         # Create submit button
         b_sub = tk.Button(self, width=button_width, text="Submit", command=lambda: print(get_entries()))
@@ -63,6 +45,26 @@ class SalesTracker(tk.Frame):
         # Starts at 10 to enable later addition of extra entry fields
         b_sub.grid(row=10, column=0)
         b_quit.grid(row=11, column=0)
+
+
+        def get_entries():
+            # Returns entry fields and creates items list, 
+            # prices list, and current_sale dictionary
+
+            items = []
+            prices = []
+            current_sale = {}
+
+            item = e_item.get()
+            items.append(item)
+            price = e_price.get()
+            prices.append(price)
+
+            current_sale.update({"items": items})
+            current_sale.update({"prices": prices})
+
+            return items, prices, current_sale
+
 
 root = tk.Tk()
 
