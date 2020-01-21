@@ -54,6 +54,7 @@ class SalesTracker(tk.Frame):
             items = []
             prices = []
             current_sale = {}
+            today = str(datetime.now())
 
             item = e_item.get()
             items.append(item)
@@ -63,8 +64,10 @@ class SalesTracker(tk.Frame):
             current_sale.update({"items": items})
             current_sale.update({"prices": prices})
 
-            return items, prices, current_sale
+            current_sale.update({"date": today})
 
+            return items, prices, current_sale
+            
 
 root = tk.Tk()
 
