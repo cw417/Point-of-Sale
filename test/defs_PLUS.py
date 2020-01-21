@@ -117,7 +117,6 @@ def add_to_sale(sale, item, price):
 def check_nums(nums):
     # Checks to see if items in list are digits, and returns list of items that are
     num_list = []
-    not_nums = []
     for num in nums:
         try:
             num = float(num)
@@ -126,7 +125,6 @@ def check_nums(nums):
             continue
     return num_list
 
-print(check_nums(['2', '3', 'apple', 'pear', '6.99']))
             
 
 

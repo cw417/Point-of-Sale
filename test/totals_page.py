@@ -26,3 +26,6 @@ class Totals(tk.Frame):
 
             b_products_page = tk.Button(self, text="Products", command=lambda: controller.show_frame(pp.Products))
             b_products_page.grid(row=4, column=0)
+
+            b_close = tk.Button(self, text="Close", command=self.quit)
+            b_close.grid(row=30, column=0)

@@ -123,6 +123,7 @@ class Sales(tk.Frame):
             e_price4.grid(row=9, column=1)
             
             def get_entries():
+                # Dumps entries to json file to be used by current_sale
                 dict = {}
 
                 item1 = e_item1.get()
@@ -163,3 +164,6 @@ class Sales(tk.Frame):
 
             b_totals_page = tk.Button(self, text="Totals", command=lambda: controller.show_frame(tp.Totals))
             b_totals_page.grid(row=20, column=14)
+
+            b_close = tk.Button(self, text="Close", command=self.quit)
+            b_close.grid(row=30, column=0)
