@@ -61,13 +61,8 @@ class SalesTracker(tk.Frame):
             price = e_price.get()
             prices.append(price)
 
-            current_sale.update({"items": items})
-            current_sale.update({"prices": prices})
+            return items, prices
 
-            current_sale.update({"date": today})
-
-            return items, prices, current_sale
-            
 
 root = tk.Tk()
 
