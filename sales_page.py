@@ -5,11 +5,13 @@ import ledger_page as lp
 import products_page as pp 
 import totals_page as tp
 import page_settings
+import pandas as pd
 import json
 import os
 
 # WORKFLOW
-# entry fields for item, price --> .get() and append to items, prices lists with "Add to Sale" 
+# entry fields for item, price --> .get() and append to items, prices lists with "Add to Sale"
+# "Total" button calls get_total() method to return subtotal, total 
 # create dictionary with items, prices, and datetime
 # make dict into pandas df
 # save df as csv file
@@ -17,8 +19,7 @@ import os
 
 
 #TO DO: 
-# Make Total button to display totals
-# "New Sale" button to clear current_sale.csv
+# "New Sale" button to clear current_sale
 # Figure out how to track idividual sales and organize into days
 
 
@@ -28,7 +29,8 @@ class Sales(tk.Frame):
             tk.Frame.__init__(self, parent)
             self.items = []
             self.prices = []
-            self.current_sale = {}
+            today = str(datetime.today())
+            self.current_sale = {"sale_date": today}
 
             # Labels for entry fields
             l_sales = tk.Label(self, text="Sales", font=page_settings.LARGE_FONT)
@@ -45,10 +47,12 @@ class Sales(tk.Frame):
             self.e_price.grid(row=3, column=1)
 
             # Buttons for page functions
-            b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: get_entries())
+            b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: [get_entries()])
             b_get_total = tk.Button(self, text="Get Total", command=lambda: get_total())
+            b_add_to_ledger = tk.Button(self, text="Add to Sales Ledger", command=lambda: add_to_cs())
             b_add_to_sale.grid(row=10, column=0)
             b_get_total.grid(row=11, column=0)
+            b_add_to_ledger.grid(row=12, column=0)
 
             # Buttons for page selection
             b_home_page = tk.Button(self, text="Home", command=lambda: controller.show_frame(hp.HomePage))
@@ -60,8 +64,13 @@ class Sales(tk.Frame):
             b_products_page.grid(row=20, column=13)
             b_totals_page.grid(row=20, column=14)
 
+            # Quit button
+            b_quit = tk.Button(self, text="Close", command=self.quit)
+            b_quit.grid(row=30, column=0)
+
             def get_entries():
                 # Dumps entries to json file to be used by current_sale
+                # Need to fix: updates current_sale with multiples of last item
                 item = self.e_item.get()
                 price = self.e_price.get()
                 self.items.append(item)
@@ -79,3 +88,10 @@ class Sales(tk.Frame):
                 total = round(total, 2)
                 print(f"Subtotal: ${subtotal}\nTotal: ${total}")
                 return subtotal, total
+
+            def add_to_cs():
+                for i in range(0, len(self.items)):
+                    k = "item_" + str(i)
+                    self.current_sale.update({k: [self.items[i], self.prices[i]]})
+                print(self.current_sale)
+

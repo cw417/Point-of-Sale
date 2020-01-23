@@ -49,7 +49,7 @@ class Sales(tk.Frame):
             # Buttons for page functions
             b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: [get_entries()])
             b_get_total = tk.Button(self, text="Get Total", command=lambda: get_total())
-            b_add_to_ledger = tk.Button(self, text="Add to Sales Ledger", command=lambda: print(self.current_sale))
+            b_add_to_ledger = tk.Button(self, text="Add to Sales Ledger", command=lambda: add_to_cs())
             b_add_to_sale.grid(row=10, column=0)
             b_get_total.grid(row=11, column=0)
             b_add_to_ledger.grid(row=12, column=0)
@@ -78,10 +78,6 @@ class Sales(tk.Frame):
                 print(f"Added items: {item}, ${price}")
                 self.e_item.delete(0, tk.END)
                 self.e_price.delete(0, tk.END)
-                list = [item, price]
-                for i in range(len(self.items)):
-                    k = "item_" + str(i)
-                    self.current_sale[k] = list
 
             def get_total():
                 nums = self.prices
@@ -92,4 +88,10 @@ class Sales(tk.Frame):
                 total = round(total, 2)
                 print(f"Subtotal: ${subtotal}\nTotal: ${total}")
                 return subtotal, total
+
+            def add_to_cs():
+                for i in range(0, len(self.items)):
+                    k = "item_" + str(i)
+                    self.current_sale.update({k: [self.items[i], self.prices[i]]})
+                print(self.current_sale)
 
