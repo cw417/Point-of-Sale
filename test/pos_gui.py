@@ -2,13 +2,13 @@ import tkinter as tk
 import home_page as hp 
 import sales_page as sp
 import ledger_page as lp 
-import products_page as pp 
+import products_page as pp
 import totals_page as tp
 import page_settings
 
 class POS(tk.Tk):
-    def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
+    def __init__(self, master=None, *args, **kwargs):
+        tk.Tk.__init__(self, master, *args, **kwargs)
 
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
