@@ -84,8 +84,10 @@ class Sales(tk.Frame):
                 subtotal = 0
                 for num in nums:
                     subtotal = subtotal + float(num)
+                subtotal = round(subtotal, 2)
                 total = subtotal * 1.13
                 total = round(total, 2)
+
                 print(f"Subtotal: ${subtotal}\nTotal: ${total}")
                 return subtotal, total
 
