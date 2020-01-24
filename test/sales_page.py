@@ -73,9 +73,14 @@ class Sales(tk.Frame):
                 # Need to fix: updates current_sale with multiples of last item
                 item = self.e_item.get()
                 price = self.e_price.get()
-                self.items.append(item)
-                self.prices.append(price)
-                print(f"Added items: {item}, ${price}")
+                try:
+                    price = float(price)
+                    price = round(price, 2)
+                    self.items.append(item)
+                    self.prices.append(price)
+                    print(f"Added items: {item}, ${price}")
+                except ValueError:
+                    print("Please only enter numbers in the \"Price\" field.")
                 self.e_item.delete(0, tk.END)
                 self.e_price.delete(0, tk.END)
 
