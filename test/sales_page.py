@@ -19,7 +19,7 @@ import os
 
 
 #TO DO: 
-# Fix make_csv() method
+# Fix  make_csv() - add to "New Sale" button once finished
 # Figure out how to track idividual sales and organize into days
 
 ledger_csv = 'ledger.csv'
@@ -115,7 +115,7 @@ class Sales(tk.Frame):
                 print(self.current_sale)
 
             def make_csv(csv_fp):
-                # NEED TO FIX THIS
+                ### NEED TO FIX
                 data_layout = [datetime.now(), self.current_sale["total"]]
                 df = pd.DataFrame(data_layout, columns = ['Total', 'Pay Type', 'Date'])
                 if os.path.isfile(csv_fp):
