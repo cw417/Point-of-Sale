@@ -3,65 +3,24 @@
 ## Main Project Outline
 - GUI
     1) Main Sales Page
-        - LABELS:
-            - Please type item to search for
-            - Current Sale
-                - Display items in current sale
-                - Display sale totals
-                    - Total w/ tax
-                    - Total w/o tax
-        - FIELD: Entry field for item search
-        - BUTTON: Add item to sale
-        - BUTTON: Remove item from sale (need to pop up next to each item?)
-        - BUTTON: Enter custom price
-            - FIELD: Space for float entry
-                - Will pop up on button press
-        - BUTTON: Clear Sale
-        - BUTTON: Complete Sale
-        - BUTTON: Add discount
-            - FIELD: Enter discount by $
-            - FIELD: Enter discount by %
-            - LABELS:
-                - Enter $
-                - Enter %
-                - Display discount $ total
-                - Display discount % total
-        - BUTTON: Debit
-        - BUTTON: Credit
-        - BUTTON: Cash
-            - Generate customer change amount
+        - Two entry fields for "Item" and "Price"
+        - "Add to Sale" button to add entered items to current_sale and clear entry fields
+        - "Get Total" button to get subtotal and total for current_sale
+        - "New Sale" button to append current sale to json, create pandas dataframe with items and prices
 
     2) Sales Ledger
-        - Will display a list of the daily sales
-        - BUTTON: Void Sale
+        - Will display sales ledger
+        - Entry fields to specify start and end dates
+
 
     3) Totals Page
-        - Show daily sales totals when on main Totals page
-            - Can change to Monthly or Yearly totals w/ buttons
-        - LABELS:
-            - Total w/o tax
-            - Total w/ tax
-            - Total Debit
-            - Total Credit
-            - Total Cash
-            - Gross profit
-            - Expenses
-            - Net profit
-        - BUTTON: Change to specific date
-            - Interface w/ calendar, or type YYYMMDD value?
-        - BUTTON: Filter by day, week, month, year
-        - BUTTON: Filter by Y/M/W/D Total
-        - BUTTON: Display spreadsheet
-        - BUTTON: Display
+        - Buttons to display daily, monthly, and weekly totals
+        - Will be accessing pandas dataframe to do calculations
         
     4) Stock Page
-        - Display stock items from dictionary
-        - LABELS:
-            - Item
-            - Wholesale Price
-            - Sales Price
-        - BUTTON: Add new item
-        - BUTTON: Remove item
+        - Page to display items listed in stock.json
+        - Button to enter new items to be appended as dictionary to stock.json
+        - Search, add, and modify values in item dictionaries
 
 ## TODO
 - POS
@@ -77,4 +36,4 @@
         - Try to keep dict small, so less to search through and don't need nested items
 - Stock Dictionary
     - Items will be limited to basic types that span certain prices - can add more detail later if needed
-    - Figure out stock dictionary entry keys
+    - Figure out stock dictionary entry and how to interface with json
