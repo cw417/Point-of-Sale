@@ -30,6 +30,7 @@ class Sales(tk.Frame):
             tk.Frame.__init__(self, parent)
             self.items = []
             self.prices = []
+            self.pay_type = []
             today = str(datetime.today())
             self.current_sale = {"sale_date": today}
 
@@ -37,15 +38,20 @@ class Sales(tk.Frame):
             l_sales = tk.Label(self, text="Sales", font=page_settings.LARGE_FONT)
             l_item = tk.Label(self, text="Item: ")
             l_price = tk.Label(self, text="Price: ")
+            l_pay_type = tk.Label(self, text="Pay Type: ")
             l_sales.grid(row=0, column=0)
             l_item.grid(row=2, column=0)
             l_price.grid(row=3, column=0)
+            l_pay_type.grid(row=4, column=0)
 
             # Entry fields for item & price
             self.e_item = tk.Entry(self, text="item1")
-            self.e_item.grid(row=2, column=1)
             self.e_price = tk.Entry(self, text="price1")
+            self.e_pay_type = tk.Entry(self, text="pay_type")
+            self.e_item.grid(row=2, column=1)
             self.e_price.grid(row=3, column=1)
+            self.e_pay_type.grid(row=4, column=1)
+            
 
             # Buttons for page functions
             b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: get_entries())
@@ -124,15 +130,25 @@ class Sales(tk.Frame):
                     csv = df.to_csv(csv_fp, mode='a', header=True)
 
             def clear_sale():
+                # Clears items, prices, and current_sale to begin new one
                 self.items = []
                 self.prices = []
                 self.current_sale = {"sale_date": today}
                 self.e_item.delete(0, tk.END)
                 self.e_price.delete(0, tk.END)
-                print("Sale cleared.")
+                self.e_pay_type.delete(0, tk.END)
+                print("Sale cleared. Begin new sale.")
 
             def new_sale(csv_fp):
-                add_to_cs()
-                make_csv(csv_fp)
-                clear_sale()
-                print("Begin new sale.")
+                # Checks to make sure pay_type added to sale, then adds pay_type to current_sale, 
+                # adds any enterd items to sale, and clears current_sale to begin new one
+                # 
+                if self.e_pay_type.get() == "":
+                    print("Please enter pay type.")
+                else:
+                    pay_type = self.e_pay_type.get()
+                    self.current_sale({"pay_type": pay_type})
+                    add_to_cs()
+                    #make_csv(csv_fp)
+                    print(f"Sale completed: {self.current_sale}")
+                    clear_sale()
