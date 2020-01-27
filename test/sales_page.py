@@ -23,7 +23,11 @@ import os
 # Fix  make_csv() - add to "New Sale" button once finished
 # Figure out how to track idividual sales and organize into days
 
+# Set names for files that will be created
+# CSV will contain datetime, sale total, and pay type
+# JSON will contain datetime, sale total, pay type, and items
 ledger_csv = 'ledger.csv'
+ledger_json = 'ledger.json'
 
 class Sales(tk.Frame):
 
@@ -33,7 +37,9 @@ class Sales(tk.Frame):
             self.prices = []
             self.pay_type = []
             today = str(datetime.today())
-            self.current_sale = {"sale_date": today}
+            # current_sale will be a dictionary containing the sale info until cleared
+            # It contains the current date, and will be appended with total, subtotal, and items from the sale
+            self.current_sale = {"date": today}
 
             # Labels for entry fields
             l_sales = tk.Label(self, text="Sales", font=page_settings.LARGE_FONT)
@@ -155,4 +161,8 @@ class Sales(tk.Frame):
                     clear_sale()
 
             def show_sale():
-                mb.showinfo("Current Sale", f"Current Sale: {self.current_sale}")
+                date = self.current_sale["date"]
+                subtotal = self.current_sale["subtotal"]
+                total = self.current_sale["total"]
+                structure = f"Date: {date}, Subtotal: {subtotal}, Total: {total}"
+                mb.showinfo("Current Sale", structure)
