@@ -1,5 +1,6 @@
 from datetime import datetime
 import tkinter as tk
+from tkinter import messagebox as mb
 import home_page as hp 
 import ledger_page as lp 
 import products_page as pp 
@@ -56,16 +57,16 @@ class Sales(tk.Frame):
             # Buttons for page functions
             b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: get_entries())
             b_get_total = tk.Button(self, text="Get Total", command=lambda: get_total())
-            b_add_to_ledger = tk.Button(self, text="Append/Show Sale", command=lambda: add_to_cs())
+            b_add_to_ledger = tk.Button(self, text="Append Sale", command=lambda: add_to_cs())
             b_new_sale = tk.Button(self, text="New Sale", command=lambda: new_sale(ledger_csv))
             b_clear_sale = tk.Button(self, text="Clear Sale", command=lambda: clear_sale())
-            b_show_cs = tk.Button(self, text="Show Sale", command=lambda: show_cs())
+            b_show_sale = tk.Button(self, text="Show Sale", command=lambda: show_sale())
             b_add_to_sale.grid(row=10, column=0)
             b_get_total.grid(row=11, column=0)
             b_add_to_ledger.grid(row=12, column=0)
             b_new_sale.grid(row=13, column=1)
             b_clear_sale.grid(row=13, column=0)
-            b_show_cs.grid(row=14, column=0)
+            b_show_sale.grid(row=14, column=0)
 
             # Buttons for page selection
             b_home_page = tk.Button(self, text="Home", command=lambda: controller.show_frame(hp.HomePage))
@@ -152,3 +153,6 @@ class Sales(tk.Frame):
                     #make_csv(csv_fp)
                     print(f"Sale completed: {self.current_sale}")
                     clear_sale()
+
+            def show_sale():
+                mb.showinfo("Current Sale", f"Current Sale: {self.current_sale}")
