@@ -1,3 +1,19 @@
+# WORKFLOW
+# entry fields for item, price --> .get() and append to items, prices lists with "Add to Sale"
+# "Total" button calls get_total() method to return subtotal, total 
+# create dictionary 'current_sale' with items, prices, and datetime
+# When "New Sale" is pressed, append current_sale to json file
+# make dict into pandas df
+# save df as csv file
+# read from csv to get totals
+
+
+#TO DO: 
+# Figure out how to track idividual sales and organize into days
+# Create method to write current_sale to json file
+# Add 
+
+
 from datetime import datetime
 import tkinter as tk
 from tkinter import messagebox as mb
@@ -10,19 +26,6 @@ import pandas as pd
 import json
 import os
 
-# WORKFLOW
-# entry fields for item, price --> .get() and append to items, prices lists with "Add to Sale"
-# "Total" button calls get_total() method to return subtotal, total 
-# create dictionary with items, prices, and datetime
-# make dict into pandas df
-# save df as csv file
-# read from csv to get totals
-
-
-#TO DO: 
-# Fix  make_csv() - add to "New Sale" button once finished
-# Figure out how to track idividual sales and organize into days
-
 # Set names for files that will be created
 # CSV will contain datetime, sale total, and pay type
 # JSON will contain datetime, sale total, pay type, and items
@@ -33,6 +36,12 @@ class Sales(tk.Frame):
 
         def __init__(self, parent, controller):
             tk.Frame.__init__(self, parent)
+
+            # Set file paths for ledger csv and json files that will contain past sale info
+            self.ledger_csv = 'ledger.csv'
+            self.ledger_json = 'ledger.json'
+
+            # Set up variables to be used
             self.items = []
             self.prices = []
             self.pay_type = []
@@ -62,7 +71,7 @@ class Sales(tk.Frame):
 
             # Buttons for page functions
             b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: [get_entries(), add_to_cs()])
-            b_new_sale = tk.Button(self, text="New Sale", command=lambda: new_sale(ledger_csv))
+            b_new_sale = tk.Button(self, text="New Sale", command=lambda: new_sale())
             b_clear_sale = tk.Button(self, text="Clear Sale", command=lambda: clear_sale())
             b_show_sale = tk.Button(self, text="Show Sale", command=lambda: show_sale())
             b_add_to_sale.grid(row=10, column=0)
@@ -122,15 +131,20 @@ class Sales(tk.Frame):
                     k = "item_" + str(i)
                     self.current_sale.update({k: [self.items[i], self.prices[i]]})
 
-            def make_csv(csv_fp):
-                ### NEED TO FIX
+            def make_csv():
+                # Creates CSV file with date, total, and pay type
+                # Appends csv file without headers if file already exists
                 data_layout = {'Date': [datetime.now()], 'Total': [self.current_sale["total"]], 'Pay Type': [self.current_sale["pay_type"]]}
                 df = pd.DataFrame(data_layout, columns = ['Date', 'Total', 'Pay Type'])
-                if os.path.isfile(csv_fp):
-                    csv = df.to_csv(csv_fp, mode='a', header=False)
+                if os.path.isfile(self.ledger_csv):
+                    csv = df.to_csv(self.ledger_csv, mode='a', header=False)
                 else:
-                    csv = df.to_csv(csv_fp, mode='a', header=True)
+                    csv = df.to_csv(self.ledger_csv, mode='a', header=True)
 
+            def make_json():
+                # Will create/append json file containing dictionary of current_sale dictionaries
+                with open(self.ledger_json, 'a') as fp:
+                    json.dump(self.current_sale, fp, sort_keys=True, indent=4)
 
             def clear_sale():
                 # Clears items, prices, and current_sale to begin new one
@@ -142,7 +156,7 @@ class Sales(tk.Frame):
                 self.e_pay_type.delete(0, tk.END)
                 print("Sale cleared. Begin new sale.")
 
-            def new_sale(csv_fp):
+            def new_sale():
                 # Checks to make sure pay_type added to sale, then adds pay_type to current_sale, 
                 # adds any enterd items to sale, and clears current_sale to begin new one
                 # 
@@ -152,11 +166,13 @@ class Sales(tk.Frame):
                     pay_type = self.e_pay_type.get()
                     self.current_sale.update({"pay_type": pay_type})
                     add_to_cs()
-                    make_csv(csv_fp)
+                    make_csv()
+                    make_json()
                     print(f"Sale completed: {self.current_sale}")
                     clear_sale()
 
             def show_sale():
+                # Creates window to display a formatted version of the values from current_sale
                 print(self.current_sale)
                 date = self.current_sale["date"]
                 subtotal = self.current_sale["subtotal"]
