@@ -61,18 +61,14 @@ class Sales(tk.Frame):
             
 
             # Buttons for page functions
-            b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: get_entries())
-            b_get_total = tk.Button(self, text="Get Total", command=lambda: get_total())
-            b_add_to_ledger = tk.Button(self, text="Append Sale", command=lambda: add_to_cs())
+            b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: [get_entries(), add_to_cs()])
             b_new_sale = tk.Button(self, text="New Sale", command=lambda: new_sale(ledger_csv))
             b_clear_sale = tk.Button(self, text="Clear Sale", command=lambda: clear_sale())
             b_show_sale = tk.Button(self, text="Show Sale", command=lambda: show_sale())
             b_add_to_sale.grid(row=10, column=0)
-            b_get_total.grid(row=11, column=0)
-            b_add_to_ledger.grid(row=12, column=0)
-            b_new_sale.grid(row=13, column=1)
-            b_clear_sale.grid(row=13, column=0)
-            b_show_sale.grid(row=14, column=0)
+            b_new_sale.grid(row=12, column=1)
+            b_clear_sale.grid(row=12, column=0)
+            b_show_sale.grid(row=11, column=0)
 
             # Buttons for page selection
             b_home_page = tk.Button(self, text="Home", command=lambda: controller.show_frame(hp.HomePage))
@@ -125,7 +121,6 @@ class Sales(tk.Frame):
                 for i in range(0, len(self.items)):
                     k = "item_" + str(i)
                     self.current_sale.update({k: [self.items[i], self.prices[i]]})
-                print(self.current_sale)
 
             def make_csv(csv_fp):
                 ### NEED TO FIX
@@ -154,13 +149,14 @@ class Sales(tk.Frame):
                     print("Please enter pay type.")
                 else:
                     pay_type = self.e_pay_type.get()
-                    self.current_sale({"pay_type": pay_type})
+                    self.current_sale.update({"pay_type": pay_type})
                     add_to_cs()
                     #make_csv(csv_fp)
                     print(f"Sale completed: {self.current_sale}")
                     clear_sale()
 
             def show_sale():
+                print(self.current_sale)
                 date = self.current_sale["date"]
                 subtotal = self.current_sale["subtotal"]
                 total = self.current_sale["total"]
