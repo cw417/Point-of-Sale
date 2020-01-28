@@ -53,7 +53,7 @@ class Sales(tk.Frame):
 
             # Entry fields for item & price
             self.e_item = tk.Entry(self, text="item1")
-            self.e_price = tk.Entry(self, text="price1")
+            self.e_price = tk.Entry(self, text="price")
             self.e_pay_type = tk.Entry(self, text="pay_type")
             self.e_item.grid(row=2, column=1)
             self.e_price.grid(row=3, column=1)
@@ -109,7 +109,7 @@ class Sales(tk.Frame):
                 total = subtotal * tax
                 total = round(total, 2)
                 print(f"Subtotal: ${subtotal}\nTotal: ${total}")
-                return total, subtotal
+                return subtotal, total
 
             def add_to_cs():
                 # Adds items from items and prices to current_sale dictionary
@@ -124,12 +124,13 @@ class Sales(tk.Frame):
 
             def make_csv(csv_fp):
                 ### NEED TO FIX
-                data_layout = [datetime.now(), self.current_sale["total"]]
-                df = pd.DataFrame(data_layout, columns = ['Total', 'Pay Type', 'Date'])
+                data_layout = {'Date': [datetime.now()], 'Total': [self.current_sale["total"]], 'Pay Type': [self.current_sale["pay_type"]]}
+                df = pd.DataFrame(data_layout, columns = ['Date', 'Total', 'Pay Type'])
                 if os.path.isfile(csv_fp):
                     csv = df.to_csv(csv_fp, mode='a', header=False)
                 else:
                     csv = df.to_csv(csv_fp, mode='a', header=True)
+
 
             def clear_sale():
                 # Clears items, prices, and current_sale to begin new one
@@ -151,7 +152,7 @@ class Sales(tk.Frame):
                     pay_type = self.e_pay_type.get()
                     self.current_sale.update({"pay_type": pay_type})
                     add_to_cs()
-                    #make_csv(csv_fp)
+                    make_csv(csv_fp)
                     print(f"Sale completed: {self.current_sale}")
                     clear_sale()
 
@@ -160,5 +161,6 @@ class Sales(tk.Frame):
                 date = self.current_sale["date"]
                 subtotal = self.current_sale["subtotal"]
                 total = self.current_sale["total"]
-                structure = f"Date: {date}, Subtotal: {subtotal}, Total: {total}"
+                items = self.items
+                structure = "Date: {}{}Subtotal: ${}{}Total: ${}{}Items: {}".format(date, "\n", subtotal, "\n", total, "\n", items)
                 mb.showinfo("Current Sale", structure)
