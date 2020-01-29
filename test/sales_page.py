@@ -45,7 +45,7 @@ class Sales(tk.Frame):
             self.items = []
             self.prices = []
             self.pay_type = []
-            today = str(datetime.today())
+            today = str(datetime.today().strftime("%Y-%m-%d %H:%M:%S"))
             # current_sale will be a dictionary containing the sale info until cleared
             # It contains the current date, and will be appended with total, subtotal, and items from the sale
             self.current_sale = {"date": today}
