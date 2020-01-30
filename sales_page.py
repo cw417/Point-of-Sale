@@ -45,7 +45,7 @@ class Sales(tk.Frame):
             self.items = []
             self.prices = []
             self.pay_type = []
-            today = str(datetime.today())
+            today = str(datetime.today().strftime("%Y-%m-%d %H:%M:%S"))
             # current_sale will be a dictionary containing the sale info until cleared
             # It contains the current date, and will be appended with total, subtotal, and items from the sale
             self.current_sale = {"date": today}
@@ -67,10 +67,11 @@ class Sales(tk.Frame):
             self.e_item.grid(row=2, column=1)
             self.e_price.grid(row=3, column=1)
             self.e_pay_type.grid(row=4, column=1)
+            self.e_item.focus()
             
 
             # Buttons for page functions
-            b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: [get_entries(), add_to_cs()])
+            b_add_to_sale = tk.Button(self, text="Add to Sale", command=lambda: [get_entries(), add_to_cs(), self.e_item.focus()])
             b_new_sale = tk.Button(self, text="New Sale", command=lambda: new_sale())
             b_clear_sale = tk.Button(self, text="Clear Sale", command=lambda: clear_sale())
             b_show_sale = tk.Button(self, text="Show Sale", command=lambda: show_sale())
@@ -137,9 +138,9 @@ class Sales(tk.Frame):
                 data_layout = {'Date': [datetime.now()], 'Total': [self.current_sale["total"]], 'Pay Type': [self.current_sale["pay_type"]]}
                 df = pd.DataFrame(data_layout, columns = ['Date', 'Total', 'Pay Type'])
                 if os.path.isfile(self.ledger_csv):
-                    csv = df.to_csv(self.ledger_csv, mode='a', header=False)
+                    df.to_csv(self.ledger_csv, mode='a', header=False)
                 else:
-                    csv = df.to_csv(self.ledger_csv, mode='a', header=True)
+                    df.to_csv(self.ledger_csv, mode='a', header=True)
 
             def make_json():
                 # Will create/append json file containing dictionary of current_sale dictionaries
