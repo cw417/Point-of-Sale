@@ -1,0 +1,18 @@
+{
+    "item_0": 
+    {
+        "item_name": "name_0",
+        "wholesale_price": '9.99', 
+        "sell_price": '24.99',
+        "num_stock": '0',
+        "category": '0'
+    },
+    "item_1":
+    {
+        "item_name": "name_1",
+        "wholesale_price": '14.99', 
+        "sell_price": '34.99.99',
+        "num_stock": '0',
+        "category": '0'
+    }
+}
