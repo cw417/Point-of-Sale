@@ -15,12 +15,20 @@ class Ledger(tk.Frame):
             self.ledger_json = 'ledger.json'
             self.ledger_dict = {}
 
-            # Create label for page
+            # Main page label
             l_ledger = tk.Label(self, text="Sales Ledger", font=page_settings.LARGE_FONT)
             l_ledger.grid(row=0, column=0)
 
+            # Page labels
+            l_search_date = tk.Label(self, text="Enter date to search\n (YYYY-MM-DD):")
+            l_search_date.grid(row=2, column=0)
+
+            # Entry fields
+            e_search_date = tk.Entry(self, text="date_search")
+            e_search_date.grid(row=2, column=1)
+
             # Page-specific buttons
-            b_load_ledger = tk.Button(self, text="Load Ledger", command=lambda: load_dict(self.ledger_json))
+            b_load_ledger = tk.Button(self, text="Load Ledger", command=lambda: [load_dict(self.ledger_json), e_search_date.focus()])
             b_load_ledger.grid(row=1, column=0)
 
             # Page navigation buttons
