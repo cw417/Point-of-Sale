@@ -29,7 +29,9 @@ class Ledger(tk.Frame):
 
             # Page-specific buttons
             b_load_ledger = tk.Button(self, text="Load Ledger", command=lambda: [load_dict(self.ledger_json), e_search_date.focus()])
+            b_search_date = tk.Button(self, text="Search")
             b_load_ledger.grid(row=1, column=0)
+            b_search_date.grid(row=3, column=0)
 
             # Page navigation buttons
             b_home_page = tk.Button(self, text="Home", command=lambda: controller.show_frame(hp.HomePage))
@@ -56,12 +58,15 @@ class Ledger(tk.Frame):
                     print("Sorry, but the ledger file could not be found in the current directory.")
 
             def nest_dict_iter(sale_dict):
+                # NOT FUNCTIONAL
                 # Iterates through nested dictionaries to return nested values
                 # TODO: Needs to look for specified key and return value
+                # TODO: Need to reformat how sales_page saves sale to json
                 for k, v in sale_dict.items():
                     for i in range(0,1):
                         name = "item_" + str(i)
                         if name in k:
                             for t, c in v.items():
+                                c = f"{t}: {c}"
                                 print(c)
             
