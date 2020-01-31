@@ -57,7 +57,7 @@ class Ledger(tk.Frame):
                 except FileNotFoundError:
                     print("Sorry, but the ledger file could not be found in the current directory.")
 
-            def nest_dict_iter(sale_dict):
+            def nest_iter_0(sale_dict):
                 # NOT FUNCTIONAL
                 # Iterates through nested dictionaries to return nested values
                 # TODO: Needs to look for specified key and return value
@@ -69,4 +69,18 @@ class Ledger(tk.Frame):
                             for t, c in v.items():
                                 c = f"{t}: {c}"
                                 print(c)
+
+            def nest_iter_1(sale_dict):
+                # Iterates through nested dictionaries to return nested values
+                # TODO: Needs to look for specified key and return value
+                for k, v in sale_dict.items():
+                    for i in range(0,len(sale_dict.items())):
+                        name = "item_" + str(i)
+                        if name in k:
+                            try:
+                                for t, c in v.items():
+                                    c = f"{t}: {c}"
+                                    print(c)
+                            except AttributeError:
+                                print(f"{k}: {v}")
             
