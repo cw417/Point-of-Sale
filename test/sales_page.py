@@ -82,7 +82,7 @@ class Sales(tk.Frame):
 
             # Buttons for page selection
             b_home_page = tk.Button(self, text="Home", command=lambda: controller.show_frame(hp.HomePage))
-            b_ledger = tk.Button(self, text="Sales Ledger", command=lambda: controller.show_frame(lp.SalesLedger))
+            b_ledger = tk.Button(self, text="Sales Ledger", command=lambda: controller.show_frame(lp.Ledger))
             b_products_page = tk.Button(self, text="Products", command=lambda: controller.show_frame(pp.Products))
             b_totals_page = tk.Button(self, text="Totals", command=lambda: controller.show_frame(tp.Totals))
             b_home_page.grid(row=20, column=11)
