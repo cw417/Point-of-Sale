@@ -23,17 +23,26 @@
         - Search, add, and modify values in item dictionaries
 
 ## TODO
+- Sales Page
+    - Need to modify sales_page
+    - instead of saving each sale to a single json file,
+    - need to make each sale its own json file
+    - title will be datetime
+    - folder for each day in YYYY-MM-DD
+    - function to check date to see if folder for today already created
+    - make folder if no folder for today already exits
+    - save sale in folder as datetime 'YYYY-MM-DD HH:MM:SS.json'
 - POS
     - Interface with dictionary
-    - Add items
-    - Return totals
-    - Log sales
     - Data breakdown
     - Use pandas for CSV to log data
 - GUI
     - Similar to Vend
-    - Drop down, searchable item menu
+    - Drop down, searchable item menu?
         - Try to keep dict small, so less to search through and don't need nested items
 - Stock Dictionary
     - Items will be limited to basic types that span certain prices - can add more detail later if needed
     - Figure out stock dictionary entry and how to interface with json
+
+
+
